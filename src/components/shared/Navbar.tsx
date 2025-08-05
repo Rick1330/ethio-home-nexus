@@ -53,10 +53,10 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {isLoggedIn ? (
               <div className="flex items-center space-x-4">
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" onClick={() => window.location.href = '/dashboard'}>
                   <Heart className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" onClick={() => window.location.href = '/dashboard'}>
                   <User className="h-5 w-5" />
                 </Button>
                 <Button 
@@ -70,13 +70,13 @@ export const Navbar = () => {
               <div className="flex items-center space-x-3">
                 <Button 
                   variant="ghost" 
-                  onClick={() => setIsLoggedIn(true)}
+                  onClick={() => window.location.href = '/login'}
                 >
                   Login
                 </Button>
                 <Button 
                   variant="default"
-                  onClick={() => setIsLoggedIn(true)}
+                  onClick={() => window.location.href = '/signup'}
                 >
                   Sign Up
                 </Button>
@@ -143,25 +143,33 @@ export const Navbar = () => {
                   <Button 
                     variant="outline" 
                     className="w-full"
-                    onClick={() => setIsLoggedIn(true)}
+                    onClick={() => window.location.href = '/login'}
                   >
                     Login
                   </Button>
                   <Button 
                     variant="default" 
                     className="w-full"
-                    onClick={() => setIsLoggedIn(true)}
+                    onClick={() => window.location.href = '/signup'}
                   >
                     Sign Up
                   </Button>
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <Button variant="ghost" className="w-full justify-start">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start"
+                    onClick={() => window.location.href = '/dashboard'}
+                  >
                     <Heart className="h-4 w-4 mr-2" />
                     Favorites
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start"
+                    onClick={() => window.location.href = '/dashboard'}
+                  >
                     <User className="h-4 w-4 mr-2" />
                     Profile
                   </Button>
