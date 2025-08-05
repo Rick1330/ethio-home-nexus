@@ -1,96 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Ethio-Home Real Estate Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Background colors */
+    --background: 210 20% 98%;
+    --foreground: 216 16% 15%;
 
+    /* Card backgrounds */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 216 16% 15%;
 
+    /* Popover backgrounds */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 216 16% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary colors - Professional blue */
+    --primary: 212 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 212 100% 40%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary colors - Warm accent */
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 25 95% 48%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Success colors */
+    --success: 145 70% 42%;
+    --success-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warning colors */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Error colors */
+    --destructive: 0 84% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Muted colors */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
+    /* Accent colors */
+    --accent: 210 40% 94%;
+    --accent-foreground: 216 16% 15%;
+
+    /* Border and input colors */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 212 100% 45%;
+
+    /* Border radius */
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Real estate specific colors */
+    --verified-green: 142 76% 36%;
+    --price-text: 0 0% 13%;
+    --location-text: 215 14% 46%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(212 100% 45%) 0%, hsl(212 95% 55%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
+    --gradient-button: linear-gradient(135deg, hsl(212 100% 45%) 0%, hsl(212 100% 40%) 100%);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 16px -4px hsl(212 50% 45% / 0.15);
+    --shadow-card-hover: 0 8px 24px -8px hsl(212 50% 45% / 0.25);
+    --shadow-button: 0 2px 8px -2px hsl(212 100% 45% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 212 100% 60%;
+    --primary-foreground: 0 0% 13%;
+    --secondary: 25 95% 58%;
+    --secondary-foreground: 0 0% 13%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 223 47% 11%;
+    --accent-foreground: 213 31% 91%;
+    --border: 223 47% 11%;
+    --input: 223 47% 11%;
+    --ring: 212 100% 60%;
+  }
+}
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  body {
+    @apply bg-background text-foreground font-normal;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .button-gradient {
+    background: var(--gradient-button);
+  }
+  
+  .property-card {
+    @apply bg-card rounded-xl border border-border/50 overflow-hidden transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .property-card:hover {
+    @apply -translate-y-1;
+    box-shadow: var(--shadow-card-hover);
+  }
+  
+  .verified-badge {
+    @apply inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full;
+    background: hsl(var(--verified-green) / 0.1);
+    color: hsl(var(--verified-green));
+  }
+  
+  .price-text {
+    color: hsl(var(--price-text));
+  }
+  
+  .location-text {
+    color: hsl(var(--location-text));
   }
 }
 
