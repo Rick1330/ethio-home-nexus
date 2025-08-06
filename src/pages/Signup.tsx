@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator';
 import { Home, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import authService from '@/services/authService';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +24,7 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -63,20 +66,25 @@ const Signup = () => {
     }
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await authService.signup({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+        role: formData.role as 'buyer' | 'seller',
+      });
       
       toast({
         title: "Account created successfully!",
         description: "Welcome to Ethio-Home. You can now start exploring properties.",
       });
 
-      // Redirect to dashboard
-      window.location.href = '/dashboard';
-    } catch (error) {
+      navigate('/dashboard');
+    } catch (error: any) {
       toast({
         title: "Registration failed",
-        description: "Something went wrong. Please try again.",
+        description: error.response?.data?.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -315,7 +323,7 @@ const Signup = () => {
 
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Already have an account? </span>
-              <Button variant="link" className="px-0" onClick={() => window.location.href = '/login'}>
+              <Button variant="link" className="px-0" onClick={() => navigate('/login')}>
                 Sign in
               </Button>
             </div>
@@ -323,7 +331,7 @@ const Signup = () => {
         </Card>
 
         <div className="text-center mt-6">
-          <Button variant="link" onClick={() => window.location.href = '/'}>
+          <Button variant="link" onClick={() => navigate('/')}>
             ← Back to home
           </Button>
         </div>

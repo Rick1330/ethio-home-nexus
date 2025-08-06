@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Home, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuthStore } from '@/store/authStore';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { login } = useAuthStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -28,20 +32,18 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await login(formData.email, formData.password);
       
       toast({
         title: "Welcome back!",
         description: "You have successfully logged in.",
       });
 
-      // Redirect to dashboard
-      window.location.href = '/dashboard';
-    } catch (error) {
+      navigate('/dashboard');
+    } catch (error: any) {
       toast({
         title: "Login failed",
-        description: "Please check your credentials and try again.",
+        description: error.response?.data?.message || "Please check your credentials and try again.",
         variant: "destructive",
       });
     } finally {
@@ -184,7 +186,7 @@ const Login = () => {
 
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Don't have an account? </span>
-              <Button variant="link" className="px-0" onClick={() => window.location.href = '/signup'}>
+              <Button variant="link" className="px-0" onClick={() => navigate('/signup')}>
                 Sign up
               </Button>
             </div>
@@ -192,7 +194,7 @@ const Login = () => {
         </Card>
 
         <div className="text-center mt-6">
-          <Button variant="link" onClick={() => window.location.href = '/'}>
+          <Button variant="link" onClick={() => navigate('/')}>
             ← Back to home
           </Button>
         </div>
