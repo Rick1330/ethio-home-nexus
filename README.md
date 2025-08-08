@@ -1,73 +1,72 @@
-# Welcome to your Lovable project
+# Ethio-Home
 
-## Project info
+A comprehensive real estate platform for Ethiopian properties.
 
-**URL**: https://lovable.dev/projects/766878e4-06eb-4b11-a5f7-22a74b0e5a0b
+## Project Structure
 
-## How can I edit this code?
+```
+/
+├── frontend/          # React frontend application
+│   ├── src/          # Frontend source code
+│   ├── public/       # Static assets
+│   └── package.json  # Frontend dependencies
+└── backend/          # Backend API (to be added)
+```
 
-There are several ways of editing your application.
+## Frontend
 
-**Use Lovable**
+The frontend is built with:
+- React 18 + TypeScript
+- Vite for development
+- Tailwind CSS for styling
+- React Router for navigation
+- Zustand for state management
+- React Query for server state
+- Axios for API calls
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/766878e4-06eb-4b11-a5f7-22a74b0e5a0b) and start prompting.
+### Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Navigate to frontend directory:
+```bash
+cd frontend
+```
 
-**Use your preferred IDE**
+2. Install dependencies:
+```bash
+npm install
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The frontend will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Environment Variables
 
-**Use GitHub Codespaces**
+Copy `.env.local` and configure:
+```
+VITE_API_BASE_URL=http://localhost:5000/api/v1
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Backend
 
-## What technologies are used for this project?
+Backend implementation will be added to the `backend/` directory.
 
-This project is built with:
+## Features
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Property browsing and search
+- User authentication (buyers/sellers)
+- Property management for sellers
+- Interest forms and reviews
+- Admin dashboard
+- Mobile-responsive design
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/766878e4-06eb-4b11-a5f7-22a74b0e5a0b) and click on Share -> Publish.
+## Original Lovable Project Info
 
-## Can I connect a custom domain to my Lovable project?
+**URL**: https://lovable.dev/projects/766878e4-06eb-4b11-a5f7-22a74b0e5a0b
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+**Deployment**: Open [Lovable](https://lovable.dev/projects/766878e4-06eb-4b11-a5f7-22a74b0e5a0b) and click Share → Publish
