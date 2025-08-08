@@ -1,7 +1,7 @@
 import api from './api';
 
 export interface Property {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   price: number;
@@ -26,9 +26,8 @@ export interface Property {
   amenities: string[];
   isVerified: boolean;
   seller: {
-    id: string;
-    firstName: string;
-    lastName: string;
+    _id: string;
+    name: string;
     email: string;
     phone: string;
   };
@@ -98,6 +97,12 @@ class PropertyService {
     return response.data.data.property;
   }
 
+  // Get property statistics (admin/employee only)
+  async getPropertyStats(): Promise<any> {
+    const response = await api.get('/properties/property-stats');
+    return response.data;
+  }
+
   // Create new property (for sellers/agents)
   async createProperty(data: CreatePropertyData, images?: File[]): Promise<Property> {
     const formData = new FormData();
@@ -153,6 +158,12 @@ class PropertyService {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data.data.property;
+  }
+
+  // Verify property (admin/employee only)
+  async verifyProperty(id: string): Promise<Property> {
+    const response = await api.put(`/properties/${id}`);
     return response.data.data.property;
   }
 

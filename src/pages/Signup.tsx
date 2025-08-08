@@ -12,8 +12,7 @@ import authService from '@/services/authService';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+        name: '',
     email: '',
     phone: '',
     password: '',
@@ -67,12 +66,12 @@ const Signup = () => {
 
     try {
       await authService.signup({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        name: formData.name,
         email: formData.email,
         phone: formData.phone,
         password: formData.password,
-        role: formData.role as 'buyer' | 'seller',
+        passwordConfirm: formData.confirmPassword,
+        role: formData.role as 'buyer' | 'seller' | 'agent',
       });
       
       toast({
@@ -114,32 +113,18 @@ const Signup = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Name Fields */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    name="firstName"
-                    placeholder="John"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                    disabled={isLoading}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    name="lastName"
-                    placeholder="Doe"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                    disabled={isLoading}
-                  />
-                </div>
+              {/* Name Field */}
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isLoading}
+                />
               </div>
 
               {/* Email */}
@@ -181,7 +166,8 @@ const Signup = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="buyer">Buyer</SelectItem>
-                    <SelectItem value="seller">Seller/Agent</SelectItem>
+                    <SelectItem value="seller">Seller</SelectItem>
+                    <SelectItem value="agent">Agent</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

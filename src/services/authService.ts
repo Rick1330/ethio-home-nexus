@@ -6,22 +6,23 @@ export interface LoginData {
 }
 
 export interface SignupData {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   phone: string;
   password: string;
-  role: 'buyer' | 'seller';
+  passwordConfirm: string;
+  role: 'buyer' | 'seller' | 'agent';
 }
 
 export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+  _id: string;
+  name: string;
   email: string;
   phone: string;
-  role: 'buyer' | 'seller' | 'admin';
+  role: 'buyer' | 'seller' | 'agent' | 'admin' | 'employee';
   isVerified: boolean;
+  active: boolean;
+  photo?: string;
   createdAt: string;
 }
 
@@ -35,9 +36,10 @@ export interface ResetPasswordData {
 }
 
 export interface UpdateUserData {
-  firstName?: string;
-  lastName?: string;
+  name?: string;
+  email?: string;
   phone?: string;
+  photo?: string;
 }
 
 export interface UpdatePasswordData {
@@ -72,6 +74,17 @@ class AuthService {
     return response.data;
   }
 
+  // Email verification
+  async resendVerification(userId: string): Promise<{ message: string }> {
+    const response = await api.patch(`/users/send/${userId}`);
+    return response.data;
+  }
+
+  async verifyEmail(userId: string): Promise<{ user: User; token: string }> {
+    const response = await api.patch(`/users/verifyEmail/${userId}`);
+    return response.data;
+  }
+
   // User profile endpoints
   async getCurrentUser(): Promise<User> {
     const response = await api.get('/users/me');
@@ -86,6 +99,10 @@ class AuthService {
   async updatePassword(data: UpdatePasswordData): Promise<User> {
     const response = await api.patch('/users/updateMyPassword', data);
     return response.data.data.user;
+  }
+
+  async deactivateAccount(): Promise<void> {
+    await api.delete('/users/deleteMe');
   }
 }
 
