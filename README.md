@@ -6,11 +6,11 @@ A comprehensive real estate platform for Ethiopian properties.
 
 ```
 /
-├── frontend/          # React frontend application
-│   ├── src/          # Frontend source code
-│   ├── public/       # Static assets
-│   └── package.json  # Frontend dependencies
-└── backend/          # Backend API (to be added)
+├── src/              # Frontend source code
+├── public/           # Static assets
+├── backend/          # Backend API (to be added)
+├── package.json      # Frontend dependencies
+└── README.md
 ```
 
 ## Frontend
@@ -26,17 +26,12 @@ The frontend is built with:
 
 ### Getting Started
 
-1. Navigate to frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Start development server:
+2. Start development server:
 ```bash
 npm run dev
 ```
@@ -45,7 +40,7 @@ The frontend will be available at `http://localhost:8080`
 
 ### Environment Variables
 
-Copy `.env.local` and configure:
+Configure in `.env.local`:
 ```
 VITE_API_BASE_URL=http://localhost:5000/api/v1
 ```
