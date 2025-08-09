@@ -3,6 +3,7 @@ import { Navbar } from '@/components/shared/Navbar';
 import { Hero } from '@/components/shared/Hero';
 import { PropertyCard } from '@/components/property/PropertyCard';
 import { Footer } from '@/components/shared/Footer';
+import { ApiStatus } from '@/components/shared/ApiStatus';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, Star, TrendingUp } from 'lucide-react';
 import property1 from '@/assets/property-1.jpg';
@@ -171,6 +172,13 @@ const Index = () => {
               List Your Property
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* API Status for development */}
+      <section className="py-8 bg-muted/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ApiStatus />
         </div>
       </section>
 

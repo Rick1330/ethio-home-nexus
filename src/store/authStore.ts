@@ -12,7 +12,7 @@ interface AuthState {
   setLoading: (loading: boolean) => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  getCurrentUser: () => Promise<void>;
+  getCurrentUser: () => Promise<User | null>;
   clearAuth: () => void;
 }
 
@@ -72,12 +72,14 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
             isLoading: false 
           });
+          return user;
         } catch (error) {
           set({ 
             user: null, 
             isAuthenticated: false,
             isLoading: false 
           });
+          throw error;
         }
       },
 

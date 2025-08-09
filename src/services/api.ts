@@ -7,6 +7,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // 10 seconds timeout
 });
 
 // Request interceptor to handle authentication
@@ -28,9 +29,21 @@ api.interceptors.response.use(
   (error) => {
     // Handle common error cases
     if (error.response?.status === 401) {
-      // Redirect to login on unauthorized
-      window.location.href = '/login';
+      // Clear auth state and redirect to login on unauthorized
+      localStorage.removeItem('auth-storage');
+      if (!window.location.pathname.includes('/login')) {
+        window.location.href = '/login';
+      }
     }
+    
+    // Log errors for debugging
+    console.error('API Error:', {
+      status: error.response?.status,
+      message: error.response?.data?.message || error.message,
+      url: error.config?.url,
+      method: error.config?.method,
+    });
+    
     return Promise.reject(error);
   }
 );
